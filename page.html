@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>playing-area</title>
+    <style>
+        body {
+            background-color: rgb(113, 209, 113);
+            margin: 0;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .box {
+            display: flex;
+            border: 2px solid white;
+            width: 600px;
+            height: 110px;
+            margin: 40px 350px;
+            border-radius: 8px;
+        }
+
+        .game {
+            list-style-type: none;
+            font-size: 25px;
+            color: white;
+            padding-left: 18px;
+        }
+
+        .box1 {
+            display: flex;
+            height: 80px;
+            width: 100px;
+            border: 1px solid white;
+            border-radius: 5px;
+            margin-top: 15px;
+            background-color: white;
+            margin-left: 200px;
+        }
+
+        .box2 {
+            display: flex;
+            height: 80px;
+            width: 100px;
+            border: 1px solid white;
+            border-radius: 5px;
+            margin-left: 30px;
+            margin-top: 15px;
+            background-color: white;
+        }
+
+        #one {
+            margin-top: 10px;
+            padding-left: 10px;
+        }
+
+        #two {
+            position: absolute;
+            margin-top: 25px;
+            margin-left: 20px;
+        }
+
+        #three {
+            font-size: 34px;
+            margin-top: 50px;
+            margin-left: -50px;
+        }
+
+        #six {
+            margin-top: 50px;
+            margin-left: -30px;
+            font-size: 34px;
+        }
+
+        #four {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        #five {
+            margin-top: 25px;
+            margin-left: -45px;
+        }
+        #user-choice-display {
+            position: absolute;
+            display: flex;
+            background-color: white;
+            border-radius: 70px;
+            height: 120px;
+            width: 120px;
+            margin-left: 400px;
+            border: 6px solid blue;
+            transition: transform 0.3s;
+            margin-top: 250px;
+        }
+        #user-choice-display img {
+            position: absolute;
+            padding-left: 25px;
+            padding-top: 19px;
+           
+        }
+        #computer-choice-display img {
+            position: absolute;
+            padding-left: 32px;
+            padding-top: 15px;
+           
+        }
+        #computer-choice-display {
+            position: absolute;
+            display: flex;
+            background-color: white;
+            border-radius: 70px;
+            height: 120px;
+            width: 120px;
+            margin-left: 800px;
+            border: 6px solid magenta;
+            transition: transform 0.3s;
+            margin-top: 250px;
+        }
+        .rule1 {
+            position: absolute;
+            margin-top: 180px;
+            margin-left: 1150px;
+            height: 40px;
+            width: 80px;
+            border: 2px solid white;
+            border-radius: 5px;
+            color: white;
+            background-color: rgb(113, 209, 113);
+            cursor: pointer;
+        }
+
+       
+
+        .popup-menu {
+            display: none;
+            position: absolute;
+            background-color: green;
+            border: 5px solid white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-left: 990px;
+            margin-top: -170px;
+            width: 305px;
+        }
+
+        .close {
+            position: absolute;
+            background-color: red;
+            cursor: pointer;
+            border-radius: 70px;
+            border: 5px solid white;
+            color: white;
+            height: 40px;
+            width: 50px;
+            margin-top: -320px;
+            margin-left: 300px;
+        }
+        .next-button {
+            position: absolute;
+            margin-top: 180px;
+            margin-left: 1250px;
+            height: 40px;
+            width: 80px;
+            border: 2px solid white;
+            border-radius: 5px;
+            color: white;
+            background-color: rgb(113, 209, 113);
+            cursor: pointer;
+        }
+
+        .play-again-button {
+            height: 40px;
+            width: 120px;
+            border-radius: 5px;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+            margin-left: 595px;
+            margin-top: 80px;
+        }
+       
+        #result-display{
+            padding-left: 600px;
+            padding-top: 150px;
+            color: white;
+            font-size: 40px;
+
+        }
+        #choice1{
+            position:absolute;
+            padding-left: 420px;
+            padding-top: 15px;
+            color: white;
+            font-size: 20px;
+        }
+        #choice2{
+            position:absolute;
+            padding-left: 820px;
+            padding-top: 15px;
+            color: white;
+            font-size: 20px;
+        }
+        /* Add the 'wavy' class styles for the wavy effect */
+        .wavy {
+    animation: wavyEffect 1s infinite alternate;
+}
+
+@keyframes wavyEffect {
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+      
+    
+        </style>
+        <body>
+            <div id="user-choice-display"></div>
+            <div id="computer-choice-display"></div>
+            <script>
+
+            // Function to toggle the popup menu
+        function togglePopup() {
+            var popicon = document.getElementById("popup");
+            if (popicon.style.display === "block") {
+                popicon.style.display = "none";
+            } else {
+                popicon.style.display = "block";
+            }
+        }
+
+        // Function to close the popup menu
+        function closePopup() {
+            var popicon = document.getElementById("popup");
+            popicon.style.display = "none";
+        }
+          function playAgain(){
+            window.location.href = "index.html";
+          }
+          function nextGame() {
+        window.location.href = "hurray.html";
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+    // Retrieve scores from URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const yourScore = parseInt(params.get('yourScore')) || 0;
+    const computerScore = parseInt(params.get('computerScore')) || 0;
+    // Display the scores only if there is a winner (not a tie)
+
+    // Display the scores
+    document.getElementById("six").textContent = yourScore;
+    document.getElementById("three").textContent = computerScore;
+});
+
+ 
+
+           document.addEventListener('DOMContentLoaded', function() {
+            // Get the user's choice from local storage
+            const userChoice = localStorage.getItem('userChoice');
+            // Check if computer choice is already stored in sessionStorage
+    let computerChoice = sessionStorage.getItem('computerChoice');
+
+// If not stored, generate a new computer choice
+if (!computerChoice) {
+    const computerChoices = ['stone', 'scissors', 'paper'];
+    computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    // Store the computer's choice in sessionStorage
+    sessionStorage.setItem('computerChoice', computerChoice);
+}
+           
+          
+          // Display the user's choice
+            const userChoiceDisplay = document.getElementById('user-choice-display');
+            userChoiceDisplay.innerHTML = `<img src="${getImageUrl(userChoice)}" alt="${userChoice}" id = "circle1">`;
+
+            // Display the computer's choice
+            const computerChoiceDisplay = document.getElementById('computer-choice-display');
+            computerChoiceDisplay.innerHTML = `<img src="${getImageUrl(computerChoice)}" alt="${computerChoice}" id ="circle2">`;
+            
+             // Determine the winner and display the message in page.html
+             const resultDisplay = document.getElementById('result-display');
+             const userChoiceCircle = document.getElementById('user-choice-display');
+    const nextButton = document.getElementById('next-button'); 
+            if (userChoice === computerChoice) {
+                resultDisplay.textContent = " Tie up!";
+                nextButton.style.display = 'none';
+            } else if (
+                (userChoice === "stone" && computerChoice === "scissors") ||
+                (userChoice === "paper" && computerChoice === "stone") ||
+                (userChoice === "scissors" && computerChoice === "paper")
+            ) {
+                resultDisplay.textContent = "You win!";
+                // Display the "Next" button
+        nextButton.style.display = 'block';
+            } else {
+                resultDisplay.textContent = "PC wins!";
+                nextButton.style.display = 'none';
+            }
+        });
+            // Function to get the image URL based on the choice
+            function getImageUrl(choice) {
+                if (choice === 'stone') {
+                    return 'https://i.ibb.co/6H9V6gg/stone.jpg';
+                } else if (choice === 'scissors') {
+                    return 'https://i.ibb.co/Dkjd8TK/scissor.jpg';
+                } else if (choice === 'paper') {
+                    return 'https://i.ibb.co/9Vpw4Zh/paper.jpg';
+                }
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                // Check if the page is loaded for the first time or if it's a refresh
+    
+            // Retrieve the game result directly from the result display
+            const gameResult = document.getElementById('result-display').textContent.trim();
+             // Check for the game result and apply the wavy effect
+        if (gameResult === "You win!") {
+            document.getElementById('user-choice-display').classList.add('wavy');
+        } else if (gameResult === "PC wins!") {
+            document.getElementById('computer-choice-display').classList.add('wavy');
+        }
+    });
+
+    // Function to apply the wavy effect
+    function applyWavyEffect(circleId) {
+        const circle = document.getElementById(circleId);
+
+        // Add a class for the wavy effect
+        circle.classList.add('wavy');
+    }
+        
+               
+                </script>
+        <div class="box">
+            <ul class="game">
+                <li>ROCK</li>
+                <li>PAPER</li>
+                <li>SCISSORS</li>
+            </ul>
+            <div class="box1">
+                <p id="one"> COMPUTER
+                    <p>
+                        <p id="two">SCORE</p>
+                        <div>
+                            <p id="three"><b>0</b></p>
+                        </div>
+            </div>
+            <div class="box2">
+                <p id="four">YOUR</p>
+                <p id="five">SCORE</p>
+                <div>
+                    <p id="six"><b>0</b></p>
+                </div>
+            </div>
+        </div>
+        </div>
+        <p id ="choice1">your choice</p>
+        <p id ="choice2">PC choice</p>
+        <div id="result-display"></div>
+        <button class="rule1" onclick="togglePopup()">RULES</button>
+<div class="popup-menu" id="popup">
+    <h1 style="margin-left: 70px; margin-top: -13px;color:white;">Game Rules</h1>
+    <ul>
+        <li style="color:white;"> Rock beats scissors, scissors beats
+            paper, and paper beats rock.
+        </li>
+        <br>
+        <li style="color:white;">
+            Agree ahead of time whether you'll
+            count off "rock, paper, scissors,
+            shoot" or just "rock, paper, scissors."
+        </li>
+        <br>
+        <li style="color:white;">
+            Use rock, paper, scissors to settle
+            minor decisions or simply play to
+            pass the time.
+        </li>
+        <br>
+        <li style="color:white;">
+            if both players lay down the same
+            hand, each player lays down another
+            hand.
+        </li>
+    </ul>
+    <button class="close" onclick="closePopup()">X</button>
+</div>
+<button class="next-button" id="next-button" onclick="nextGame()">Next</button>
+
+<button class="play-again-button" onclick="playAgain()">Play Again</button>
+        </body>
+        </html>
